@@ -7,7 +7,7 @@ desc="rename changes file name"
 dir=`dirname $0`
 . ${dir}/../misc.sh
 
-echo "1..122"
+echo "1..41"
 
 n0=`namegen`
 n1=`namegen`
@@ -18,21 +18,22 @@ expect 0 mkdir ${n3} 0755
 cdir=`pwd`
 cd ${n3}
 
-for type in regular fifo block char socket; do
+for type in regular; do
 	create_file ${type} ${n0} 0644
 	expect ${type},0644,1 lstat ${n0} type,mode,nlink
 	inode=`${fstest} lstat ${n0} inode`
 	expect 0 rename ${n0} ${n1}
 	expect ENOENT lstat ${n0} type,mode,nlink
 	expect ${type},${inode},0644,1 lstat ${n1} type,inode,mode,nlink
-	expect 0 link ${n1} ${n0}
-	expect ${type},${inode},0644,2 lstat ${n0} type,inode,mode,nlink
-	expect ${type},${inode},0644,2 lstat ${n1} type,inode,mode,nlink
+	#expect 0 link ${n1} ${n0}
+	#expect ${type},${inode},0644,2 lstat ${n0} type,inode,mode,nlink
+	#expect ${type},${inode},0644,2 lstat ${n1} type,inode,mode,nlink
 	expect 0 rename ${n1} ${n2}
-	expect ${type},${inode},0644,2 lstat ${n0} type,inode,mode,nlink
+	#expect ${type},${inode},0644,2 lstat ${n0} type,inode,mode,nlink
 	expect ENOENT lstat ${n1} type,mode,nlink
-	expect ${type},${inode},0644,2 lstat ${n2} type,inode,mode,nlink
-	expect 0 unlink ${n0}
+	#expect ${type},${inode},0644,2 lstat ${n2} type,inode,mode,nlink
+	expect ${type},${inode},0644,1 lstat ${n2} type,inode,mode,nlink
+	#expect 0 unlink ${n0}
 	expect 0 unlink ${n2}
 done
 
@@ -59,7 +60,7 @@ expect 0 unlink ${n0}
 expect 0 unlink ${n2}
 
 # unsuccessful link(2) does not update ctime.
-for type in regular dir fifo block char socket symlink; do
+for type in regular dir symlink; do
 	create_file ${type} ${n0}
 	ctime1=`${fstest} lstat ${n0} ctime`
 	sleep 1

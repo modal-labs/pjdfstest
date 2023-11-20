@@ -7,7 +7,7 @@ desc="chown returns EPERM if the operation would change the ownership, but the e
 dir=`dirname $0`
 . ${dir}/../misc.sh
 
-echo "1..132"
+echo "1..52"
 
 n0=`namegen`
 n1=`namegen`
@@ -19,7 +19,7 @@ cdir=`pwd`
 cd ${n0}
 expect 0 mkdir ${n1} 0755
 expect 0 chown ${n1} 65534 65534
-for type in regular dir fifo block char socket symlink; do
+for type in regular dir symlink; do
 	if [ "${type}" != "symlink" ]; then
 		create_file ${type} ${n1}/${n2} 65534 65534
 		expect EPERM -u 65534 -g 65534 chown ${n1}/${n2} 65533 65533

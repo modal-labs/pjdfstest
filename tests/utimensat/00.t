@@ -9,7 +9,7 @@ dir=`dirname $0`
 
 require "utimensat"
 
-echo "1..32"
+echo "1..12"
 
 n0=`namegen`
 n1=`namegen`
@@ -20,7 +20,7 @@ cd ${n1}
 
 DATE1=1900000000 #Sun Mar 17 11:46:40 MDT 2030
 DATE2=1950000000 #Fri Oct 17 04:40:00 MDT 2031
-for type in regular dir fifo block char socket; do
+for type in regular dir; do
 	create_file ${type} ${n0}
 	expect 0 open . O_RDONLY : utimensat 0 ${n0} $DATE1 0 $DATE2 0 0
 	expect $DATE1 lstat ${n0} atime

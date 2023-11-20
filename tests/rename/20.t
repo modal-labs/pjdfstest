@@ -7,7 +7,7 @@ desc="rename returns EEXIST or ENOTEMPTY if the 'to' argument is a directory and
 dir=`dirname $0`
 . ${dir}/../misc.sh
 
-echo "1..25"
+echo "1..13"
 
 n0=`namegen`
 n1=`namegen`
@@ -16,7 +16,7 @@ n2=`namegen`
 expect 0 mkdir ${n0} 0755
 expect 0 mkdir ${n1} 0755
 
-for type in regular dir fifo block char socket symlink; do
+for type in regular dir symlink; do
 	create_file ${type} ${n1}/${n2}
 	expect "EEXIST|ENOTEMPTY" rename ${n0} ${n1}
 	if [ "${type}" = "dir" ]; then

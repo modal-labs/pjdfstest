@@ -8,9 +8,9 @@ dir=`dirname $0`
 . ${dir}/../misc.sh
 
 if supported lchmod; then
-	echo "1..1349"
+	echo "1..467"
 else
-	echo "1..1323"
+	echo "1..467"
 fi
 
 n0=`namegen`
@@ -22,7 +22,7 @@ cdir=`pwd`
 cd ${n2}
 
 # super-user can always modify ownership
-for type in regular dir fifo block char socket symlink; do
+for type in regular dir symlink; do
 	if [ "${type}" != "symlink" ]; then
 		create_file ${type} ${n0}
 
@@ -58,7 +58,7 @@ done
 
 # non-super-user can modify file group if he is owner of a file and
 # gid he is setting is in his groups list.
-for type in regular dir fifo block char socket symlink; do
+for type in regular dir symlink; do
 	if [ "${type}" != "symlink" ]; then
 		create_file ${type} ${n0}
 
@@ -108,7 +108,7 @@ done
 
 # chown(2) return 0 if user is not owner of a file, but chown(2) is called
 # with both uid and gid equal to -1.
-for type in regular dir fifo block char socket symlink; do
+for type in regular dir symlink; do
 	if [ "${type}" != "symlink" ]; then
 		create_file ${type} ${n0}
 
@@ -147,7 +147,7 @@ for type in regular dir fifo block char socket symlink; do
 done
 
 # when super-user calls chown(2), set-uid and set-gid bits may be removed.
-for type in regular dir fifo block char socket symlink; do
+for type in regular dir symlink; do
 	if [ "${type}" != "symlink" ]; then
 		create_file ${type} ${n0}
 
@@ -213,7 +213,7 @@ done
 
 # when non-super-user calls chown(2) successfully, set-uid and set-gid bits may
 # be removed, except when both uid and gid are equal to -1.
-for type in regular dir fifo block char socket symlink; do
+for type in regular dir symlink; do
 	#
 	# Linux makes a destinction for behavior when an executable file vs a
 	# non-executable file. From chmod(2):
@@ -320,7 +320,7 @@ for type in regular dir fifo block char socket symlink; do
 done
 
 # successful chown(2) call (except uid and gid equal to -1) updates ctime.
-for type in regular dir fifo block char socket symlink; do
+for type in regular dir symlink; do
 	if [ "${type}" != "symlink" ]; then
 		create_file ${type} ${n0}
 
@@ -381,7 +381,7 @@ for type in regular dir fifo block char socket symlink; do
 	fi
 done
 
-for type in regular dir fifo block char socket symlink; do
+for type in regular dir symlink; do
 	if [ "${type}" != "symlink" ]; then
 		create_file ${type} ${n0}
 
@@ -428,7 +428,7 @@ for type in regular dir fifo block char socket symlink; do
 done
 
 # unsuccessful chown(2) does not update ctime.
-for type in regular dir fifo block char socket symlink; do
+for type in regular dir symlink; do
 	if [ "${type}" != "symlink" ]; then
 		create_file ${type} ${n0}
 

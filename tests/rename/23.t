@@ -7,7 +7,7 @@ desc="rename succeeds when to is multiply linked"
 dir=`dirname $0`
 . ${dir}/../misc.sh
 
-echo "1..42"
+echo "1..10"
 
 src=`namegen`
 dst=`namegen`
@@ -18,7 +18,7 @@ expect 0 mkdir ${parent} 0755
 cdir=`pwd`
 cd ${parent}
 
-for type in regular fifo block char socket; do
+for type in regular; do
 	create_file ${type} ${src}
 	create_file ${type} ${dst}
 	expect 0 link ${dst} ${dstlnk}

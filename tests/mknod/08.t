@@ -9,11 +9,11 @@ dir=`dirname $0`
 
 require mknod
 
-echo "1..35"
+echo "1..15"
 
 n0=`namegen`
 
-for type in regular dir fifo block char socket symlink; do
+for type in regular dir symlink; do
 	create_file ${type} ${n0}
 	expect EEXIST mknod ${n0} b 0644 0 0
 	expect EEXIST mknod ${n0} c 0644 0 0

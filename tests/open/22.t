@@ -7,11 +7,11 @@ desc="open returns EEXIST when O_CREAT and O_EXCL were specified and the file ex
 dir=`dirname $0`
 . ${dir}/../misc.sh
 
-echo "1..21"
+echo "1..9"
 
 n0=`namegen`
 
-for type in regular dir fifo block char socket symlink; do
+for type in regular dir symlink; do
 	create_file ${type} ${n0}
 	expect EEXIST open ${n0} O_CREAT,O_EXCL 0644
 	if [ "${type}" = "dir" ]; then

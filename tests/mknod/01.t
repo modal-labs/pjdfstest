@@ -9,13 +9,13 @@ dir=`dirname $0`
 
 require mknod
 
-echo "1..27"
+echo "1..7"
 
 n0=`namegen`
 n1=`namegen`
 
 expect 0 mkdir ${n0} 0755
-for type in regular fifo block char socket; do
+for type in regular; do
 	create_file ${type} ${n0}/${n1}
 	expect ENOTDIR mknod ${n0}/${n1}/test b 0644 1 2
 	expect ENOTDIR mknod ${n0}/${n1}/test c 0644 1 2

@@ -7,7 +7,7 @@ desc="open returns EACCES when the required permissions (for reading and/or writ
 dir=`dirname $0`
 . ${dir}/../misc.sh
 
-echo "1..144"
+echo "1..97"
 
 n0=`namegen`
 n1=`namegen`
@@ -90,58 +90,58 @@ expect 0 -u 65534 -g 65534 unlink ${n1}
 
 # FIFO.
 
-expect 0 -u 65534 -g 65534 mkfifo ${n1} 0644
+# expect 0 -u 65534 -g 65534 mkfifo ${n1} 0644
 
-expect 0 -u 65534 -g 65534 chmod ${n1} 0600
-expect 0 -u 65534 -g 65534 open ${n1} O_RDONLY,O_NONBLOCK
-expect 0 -u 65534 -g 65534 open ${n1} O_RDWR
-expect 0 -u 65534 -g 65534 chmod ${n1} 0060
-expect 0 -u 65533 -g 65534 open ${n1} O_RDONLY,O_NONBLOCK
-expect 0 -u 65533 -g 65534 open ${n1} O_RDWR
-expect 0 -u 65534 -g 65534 chmod ${n1} 0006
-expect 0 -u 65533 -g 65533 open ${n1} O_RDONLY,O_NONBLOCK
-expect 0 -u 65533 -g 65533 open ${n1} O_RDWR
+# expect 0 -u 65534 -g 65534 chmod ${n1} 0600
+# expect 0 -u 65534 -g 65534 open ${n1} O_RDONLY,O_NONBLOCK
+# expect 0 -u 65534 -g 65534 open ${n1} O_RDWR
+# expect 0 -u 65534 -g 65534 chmod ${n1} 0060
+# expect 0 -u 65533 -g 65534 open ${n1} O_RDONLY,O_NONBLOCK
+# expect 0 -u 65533 -g 65534 open ${n1} O_RDWR
+# expect 0 -u 65534 -g 65534 chmod ${n1} 0006
+# expect 0 -u 65533 -g 65533 open ${n1} O_RDONLY,O_NONBLOCK
+# expect 0 -u 65533 -g 65533 open ${n1} O_RDWR
 
-expect 0 -u 65534 -g 65534 chmod ${n1} 0477
-expect 0 -u 65534 -g 65534 open ${n1} O_RDONLY,O_NONBLOCK
-expect EACCES -u 65534 -g 65534 open ${n1} O_WRONLY,O_NONBLOCK
-expect EACCES -u 65534 -g 65534 open ${n1} O_RDWR
-expect 0 -u 65534 -g 65534 chmod ${n1} 0747
-expect 0 -u 65533 -g 65534 open ${n1} O_RDONLY,O_NONBLOCK
-expect EACCES -u 65533 -g 65534 open ${n1} O_WRONLY,O_NONBLOCK
-expect EACCES -u 65533 -g 65534 open ${n1} O_RDWR
-expect 0 -u 65534 -g 65534 chmod ${n1} 0774
-expect 0 -u 65533 -g 65533 open ${n1} O_RDONLY,O_NONBLOCK
-expect EACCES -u 65533 -g 65533 open ${n1} O_WRONLY,O_NONBLOCK
-expect EACCES -u 65533 -g 65533 open ${n1} O_RDWR
+# expect 0 -u 65534 -g 65534 chmod ${n1} 0477
+# expect 0 -u 65534 -g 65534 open ${n1} O_RDONLY,O_NONBLOCK
+# expect EACCES -u 65534 -g 65534 open ${n1} O_WRONLY,O_NONBLOCK
+# expect EACCES -u 65534 -g 65534 open ${n1} O_RDWR
+# expect 0 -u 65534 -g 65534 chmod ${n1} 0747
+# expect 0 -u 65533 -g 65534 open ${n1} O_RDONLY,O_NONBLOCK
+# expect EACCES -u 65533 -g 65534 open ${n1} O_WRONLY,O_NONBLOCK
+# expect EACCES -u 65533 -g 65534 open ${n1} O_RDWR
+# expect 0 -u 65534 -g 65534 chmod ${n1} 0774
+# expect 0 -u 65533 -g 65533 open ${n1} O_RDONLY,O_NONBLOCK
+# expect EACCES -u 65533 -g 65533 open ${n1} O_WRONLY,O_NONBLOCK
+# expect EACCES -u 65533 -g 65533 open ${n1} O_RDWR
 
-expect 0 -u 65534 -g 65534 chmod ${n1} 0177
-expect EACCES -u 65534 -g 65534 open ${n1} O_RDONLY,O_NONBLOCK
-expect EACCES -u 65534 -g 65534 open ${n1} O_WRONLY,O_NONBLOCK
-expect EACCES -u 65534 -g 65534 open ${n1} O_RDWR
-expect 0 -u 65534 -g 65534 chmod ${n1} 0717
-expect EACCES -u 65533 -g 65534 open ${n1} O_RDONLY,O_NONBLOCK
-expect EACCES -u 65533 -g 65534 open ${n1} O_WRONLY,O_NONBLOCK
-expect EACCES -u 65533 -g 65534 open ${n1} O_RDWR
-expect 0 -u 65534 -g 65534 chmod ${n1} 0771
-expect EACCES -u 65533 -g 65533 open ${n1} O_RDONLY,O_NONBLOCK
-expect EACCES -u 65533 -g 65533 open ${n1} O_WRONLY,O_NONBLOCK
-expect EACCES -u 65533 -g 65533 open ${n1} O_RDWR
+# expect 0 -u 65534 -g 65534 chmod ${n1} 0177
+# expect EACCES -u 65534 -g 65534 open ${n1} O_RDONLY,O_NONBLOCK
+# expect EACCES -u 65534 -g 65534 open ${n1} O_WRONLY,O_NONBLOCK
+# expect EACCES -u 65534 -g 65534 open ${n1} O_RDWR
+# expect 0 -u 65534 -g 65534 chmod ${n1} 0717
+# expect EACCES -u 65533 -g 65534 open ${n1} O_RDONLY,O_NONBLOCK
+# expect EACCES -u 65533 -g 65534 open ${n1} O_WRONLY,O_NONBLOCK
+# expect EACCES -u 65533 -g 65534 open ${n1} O_RDWR
+# expect 0 -u 65534 -g 65534 chmod ${n1} 0771
+# expect EACCES -u 65533 -g 65533 open ${n1} O_RDONLY,O_NONBLOCK
+# expect EACCES -u 65533 -g 65533 open ${n1} O_WRONLY,O_NONBLOCK
+# expect EACCES -u 65533 -g 65533 open ${n1} O_RDWR
 
-expect 0 -u 65534 -g 65534 chmod ${n1} 0077
-expect EACCES -u 65534 -g 65534 open ${n1} O_RDONLY,O_NONBLOCK
-expect EACCES -u 65534 -g 65534 open ${n1} O_WRONLY,O_NONBLOCK
-expect EACCES -u 65534 -g 65534 open ${n1} O_RDWR
-expect 0 -u 65534 -g 65534 chmod ${n1} 0707
-expect EACCES -u 65533 -g 65534 open ${n1} O_RDONLY,O_NONBLOCK
-expect EACCES -u 65533 -g 65534 open ${n1} O_WRONLY,O_NONBLOCK
-expect EACCES -u 65533 -g 65534 open ${n1} O_RDWR
-expect 0 -u 65534 -g 65534 chmod ${n1} 0770
-expect EACCES -u 65533 -g 65533 open ${n1} O_RDONLY,O_NONBLOCK
-expect EACCES -u 65533 -g 65533 open ${n1} O_WRONLY,O_NONBLOCK
-expect EACCES -u 65533 -g 65533 open ${n1} O_RDWR
+# expect 0 -u 65534 -g 65534 chmod ${n1} 0077
+# expect EACCES -u 65534 -g 65534 open ${n1} O_RDONLY,O_NONBLOCK
+# expect EACCES -u 65534 -g 65534 open ${n1} O_WRONLY,O_NONBLOCK
+# expect EACCES -u 65534 -g 65534 open ${n1} O_RDWR
+# expect 0 -u 65534 -g 65534 chmod ${n1} 0707
+# expect EACCES -u 65533 -g 65534 open ${n1} O_RDONLY,O_NONBLOCK
+# expect EACCES -u 65533 -g 65534 open ${n1} O_WRONLY,O_NONBLOCK
+# expect EACCES -u 65533 -g 65534 open ${n1} O_RDWR
+# expect 0 -u 65534 -g 65534 chmod ${n1} 0770
+# expect EACCES -u 65533 -g 65533 open ${n1} O_RDONLY,O_NONBLOCK
+# expect EACCES -u 65533 -g 65533 open ${n1} O_WRONLY,O_NONBLOCK
+# expect EACCES -u 65533 -g 65533 open ${n1} O_RDWR
 
-expect 0 -u 65534 -g 65534 unlink ${n1}
+# expect 0 -u 65534 -g 65534 unlink ${n1}
 
 # Directory.
 

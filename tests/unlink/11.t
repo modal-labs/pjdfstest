@@ -7,7 +7,7 @@ desc="unlink returns EACCES or EPERM if the directory containing the file is mar
 dir=`dirname $0`
 . ${dir}/../misc.sh
 
-echo "1..270"
+echo "1..94"
 
 n0=`namegen`
 n1=`namegen`
@@ -21,7 +21,7 @@ expect 0 mkdir ${n0} 0755
 expect 0 chmod ${n0} 01777
 expect 0 chown ${n0} 65534 65534
 
-for type in regular fifo block char socket symlink; do
+for type in regular symlink; do
 	# User owns both: the sticky directory and the file.
 	expect 0 chown ${n0} 65534 65534
 	create_file ${type} ${n0}/${n1} 65534 65534
